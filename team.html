@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Kabar Bola" />
+  <meta name="theme-color" content="#fff" />
+  <title>Detail Tim</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="img/icons/icon-192x192.png">
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- navigasi -->
+  <div class="navbar-fixed">
+    <nav class="white">
+      <div class="nav-wrapper fixed nav-container">
+        <span>
+          <button onclick="history.back();" class="text-sapphire sidenav-trigger btn-flat waves-effect waves-light" style="font-size: 30px; height: 100%;">&#10094;</button>
+        </span>
+        <a class="brand-logo"><img src="img/logo.png" alt="KabarBola" style="width: 170px;"></a>
+      </div>
+    </nav>
+  </div>
+  <!-- akhir navigasi -->
+
+  <!-- preloader -->
+  <div class="preloader center-align">
+    <div class="text-darken-4 preloader-wrapper big active center">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- akhir preloader -->
+
+  <!-- konten -->
+  <div class="container body-content">
+    <h5 class="with-header text-sapphire"></h5>
+    <hr style="margin-bottom: 20px;">
+    <div class="card card-detail"></div>
+    <div class="squad-list">
+      <blockquote>Kiper</blockquote>
+      <ul class="collapsible" id="Goalkeeper"></ul>
+      <blockquote>Bek</blockquote>
+      <ul class="collapsible" id="Defender"></ul>
+      <blockquote>Gelandang</blockquote>
+      <ul class="collapsible" id="Midfielder"></ul>
+      <blockquote>Penyerang</blockquote>
+      <ul class="collapsible" id="Attacker"></ul>
+    </div>
+  </div>
+  <div class="fixed-action-btn">
+    <a 
+      class="btn-floating btn-large tooltipped pulse waves-effect waves-light yellow darken-3"
+      id="btnSave" data-position="left" data-tooltip="Simpan ke favorit" style="font-size: 30px;">&#9733;</a>
+    <a 
+      class="btn-floating btn-large tooltipped waves-effect waves-light red darken-2 text-bold d-none"
+      id="btnDelete" data-position="left" data-tooltip="Hapus dari favorit" style="font-size: 30px;">&#10006;</a>
+  </div>
+  <!-- akhir konten -->
+
+  <script src="js/materialize.min.js"></script>
+  <script src="js/moment-locale.min.js"></script>
+  <script src="js/reg-sw.js"></script>
+  <script src="js/idb.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const collapsible = document.querySelectorAll('.collapsible');
+      M.Collapsible.init(collapsible);
+
+      const tooltip = document.querySelectorAll('.tooltipped');
+      M.Tooltip.init(tooltip);
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const idTeam = parseInt(urlParams.get('id'));
+      const getTeam = getTeamById();
+      const btnSave = document.getElementById('btnSave');
+      const btnDelete = document.getElementById('btnDelete');
+
+      isTeamFav(idTeam)
+        .then((msg) => {
+          btnSave.classList.add('d-none');
+          btnDelete.classList.remove('d-none');
+        })
+        .catch((msg) => {
+          btnSave.classList.remove('d-none');
+          btnDelete.classList.add('d-none');
+        });
+
+      btnSave.addEventListener('click', () => {
+        getTeam.then((team) => {
+          addFavTeam(team);
+        });
+      });
+      btnDelete.addEventListener('click', () => {
+        deleteFavTeam(idTeam);
+      });
+    });
+  </script>
+</body>
+
+</html>

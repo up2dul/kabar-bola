@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Kabar Bola" />
+  <meta name="theme-color" content="#fff" />
+  <title>Kabar Bola</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="img/icons/icon-192x192.png">
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- navigasi -->
+  <div class="navbar-fixed">
+    <nav class="white">
+      <div class="nav-wrapper fixed nav-container">
+        <span>
+          <button onclick="history.back();" class="text-sapphire sidenav-trigger btn-flat waves-effect waves-light" style="font-size: 30px; height: 100%;">&#10094;</button>
+        </span>
+        <a class="brand-logo"><img src="img/logo.png" alt="KabarBola" style="width: 170px;"></a>
+      </div>
+    </nav>
+  </div>
+  <!-- akhir navigasi -->
+
+  <!-- preloader -->
+  <div class="preloader center-align">
+    <div class="text-darken-4 preloader-wrapper big active center">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- akhir preloader -->
+
+  <!-- konten -->
+  <div class="container body-content">
+    <h5 class="with-header text-sapphire"></h5>
+    <hr style="margin-bottom: 20px;">
+    <div class="card card-detail"></div>
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs tabs-fixed-width">
+          <li class="tab col s6"><a class="active" href="#klasemen">Klasemen</a></li>
+          <li class="tab col s6"><a href="#topskor">Top Skor</a></li>
+        </ul>
+      </div>
+
+      <div id="klasemen" class="col s12">
+        <table class="centered striped responsive-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Klub</th>
+              <th>M</th>
+              <th>M</th>
+              <th>S</th>
+              <th>K</th>
+              <th>GM</th>
+              <th>GA</th>
+              <th>Poin</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="topskor" class="col s12">
+        <table class="centered striped">
+          <thead>
+            <tr>
+              <th colspan="2">Pemain</th>
+              <th>Klub</th>
+              <th>Gol</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- akhir konten -->
+
+  <script src="js/materialize.min.js"></script>
+  <script src="js/moment-locale.min.js"></script>
+  <script src="js/reg-sw.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      moment.locale('id');
+
+      getLeagueById();
+      getLeagueStandings();
+      getLeagueScorers();
+
+      const tabs = document.querySelectorAll('.tabs');
+      M.Tabs.init(tabs);
+    });
+  </script>
+</body>
+
+</html>
