@@ -49,19 +49,9 @@ const renderLeagues = (dataJSON) => {
 }
 
 const getLeagues = () => {
-  if ('caches' in window) {
-    caches.match(`${BASE_URL}/competitions?plan=TIER_ONE`).then((response) => {
-      if (response) {
-        response.json().then((data) => {
-          renderLeagues(data);
-        });
-      } else {
-        fetchAPI(`${BASE_URL}/competitions?plan=TIER_ONE`).then((data) => {
-          renderLeagues(data);
-        });
-      }
-    });
-  }
+  fetchAPI(`${BASE_URL}/competitions?plan=TIER_ONE`).then((data) => {
+    renderLeagues(data);
+  });
 }
 
 // league.html
@@ -152,21 +142,10 @@ const getLeagueById = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('id');
 
-    if ('caches' in window) {
-      caches.match(`${BASE_URL}/competitions/${idParam}`).then((response) => {
-        if (response) {
-          response.json().then((data) => {
-            renderLeague(data);
-            resolve(data);
-          });
-        } else {
-          fetchAPI(`${BASE_URL}/competitions/${idParam}`).then((data) => {
-            renderLeague(data);
-            resolve(data);
-          });
-        }
-      });
-    }
+    fetchAPI(`${BASE_URL}/competitions/${idParam}`).then((data) => {
+      renderLeague(data);
+      resolve(data);
+    });
   });
 }
 
@@ -175,21 +154,10 @@ const getLeagueStandings = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('id');
 
-    if ('caches' in window) {
-      caches.match(`${BASE_URL}/competitions/${idParam}/standings`).then((response) => {
-        if (response) {
-          response.json().then((data) => {
-            renderStandings(data);
-            resolve(data);
-          });
-        } else {
-          fetchAPI(`${BASE_URL}/competitions/${idParam}/standings`).then((data) => {
-            renderStandings(data);
-            resolve(data);
-          });
-        }
-      });
-    }
+    fetchAPI(`${BASE_URL}/competitions/${idParam}/standings`).then((data) => {
+      renderStandings(data);
+      resolve(data);
+    });
   });
 }
 
@@ -198,21 +166,10 @@ const getLeagueScorers = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('id');
 
-    if ('caches' in window) {
-      caches.match(`${BASE_URL}/competitions/${idParam}/scorers`).then((response) => {
-        if (response) {
-          response.json().then((data) => {
-            renderScorers(data);
-            resolve(data);
-          });
-        } else {
-          fetchAPI(`${BASE_URL}/competitions/${idParam}/scorers`).then((data) => {
-            renderScorers(data);
-            resolve(data);
-          });
-        }
-      });
-    }
+    fetchAPI(`${BASE_URL}/competitions/${idParam}/scorers`).then((data) => {
+      renderScorers(data);
+      resolve(data);
+    });
   });
 }
 
@@ -286,21 +243,10 @@ const getTeamById = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('id');
 
-    if ('caches' in window) {
-      caches.match(`${BASE_URL}/teams/${idParam}`).then((response) => {
-        if (response) {
-          response.json().then((data) => {
-            renderTeam(data);
-            resolve(data);
-          });
-        } else {
-          fetchAPI(`${BASE_URL}/teams/${idParam}`).then((data) => {
-            renderTeam(data);
-            resolve(data);
-          });
-        }
-      });
-    }
+    fetchAPI(`${BASE_URL}/teams/${idParam}`).then((data) => {
+      renderTeam(data);
+      resolve(data);
+    });
   });
 }
 

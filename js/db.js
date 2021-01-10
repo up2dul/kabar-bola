@@ -14,7 +14,7 @@ const addFavTeam = (team) => {
 		.then((db) => {
 			const tx = db.transaction('favTeam', 'readwrite');
 			const store = tx.objectStore('favTeam');
-			store.add(team);
+			store.put(team);
 			return tx.complete;
 		}).then(() => {
 			btnSave.classList.add('d-none');

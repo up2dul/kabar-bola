@@ -101,18 +101,7 @@
   <script src="js/moment-locale.min.js"></script>
   <script src="js/reg-sw.js"></script>
   <script src="js/api.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      moment.locale('id');
-
-      getLeagueById();
-      getLeagueStandings();
-      getLeagueScorers();
-
-      const tabs = document.querySelectorAll('.tabs');
-      M.Tabs.init(tabs);
-    });
-  </script>
+  <script src="js/league.js"></script>
 </body>
 
 </html>
